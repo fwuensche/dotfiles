@@ -1,23 +1,24 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL 
 
-set nocompatible         " get rid of Vi compatibility mode. SET FIRST!
-let mapleader = ","      " change default leader key
-set history=1000         " increase command history limit
-set splitbelow           " create new horizontal windows below
-set splitright           " create new horizontal windows to the right
+set nocompatible            " get rid of Vi compatibility mode. SET FIRST!
+let mapleader = "\<Space>"  " change default leader key
+set history=1000            " increase command history limit
+set splitbelow              " create new horizontal windows below
+set splitright              " create new horizontal windows to the right
 
-set scrolloff=5           " minimal number of lines before and after cursor
-set number                " show line numbers
-set numberwidth=3         " make the number gutter n characters wide
-set cul                   " highlight current line
-set laststatus=2          " last window always has a statusline
-set ruler                 " always show info along bottom.
+set scrolloff=5             " minimal number of lines before and after cursor
+set number                  " show line numbers
+set numberwidth=3           " make the number gutter n characters wide
+set cul                     " highlight current line
+set laststatus=2            " last window always has a statusline
+set ruler                   " always show info along bottom.
 
-set nohlsearch            " don't continue to highlight searched phrases.
-set incsearch             " but do highlight as you type your search.
-set ignorecase            " ignore case sensitive in the file
-set smartcase             " if you type in camel case, assume camel case
+set hlsearch                " don't continue to highlight searched phrases.
+set incsearch               " but do highlight as you type your search.
+set ignorecase              " ignore case sensitive in the file
+set smartcase               " if you type in camel case, assume camel case
+nmap <Leader>c :nohlsearch<cr> 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -51,6 +52,7 @@ nnoremap <Tab> gt
 call plug#begin('~/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
 
 " add molokai theme
 Plug 'tomasr/molokai'
