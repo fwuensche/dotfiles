@@ -1,0 +1,20 @@
+[user]
+  email = f.wuensche@gmail.com
+  name = Flavio Wuensche
+[core]
+  excludesfile = ~/.gitignore_global
+  editor = vim
+[diff]
+  tool = vimdiff
+[merge]
+  tool = vimdiff
+[color]
+  ui = true
+[alias]
+  lol = log --graph --decorate --pretty=tformat:'%C(blue)%h%Creset%C(yellow bold)%d%Creset %s %C(green)(%ar)%Creset %C(cyan)%an%Creset'
+  st = status -s
+  ch = checkout
+  br = branch
+  co = commit
+[push]
+  default = simple
