@@ -20,6 +20,8 @@ set ignorecase              " ignore case sensitive in the file
 set smartcase               " if you type in camel case, assume camel case
 nmap <Leader>c :nohlsearch<cr> 
 
+set mouse=a                 " enable mouse in all modes
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FORMATTING & LAYOUT
