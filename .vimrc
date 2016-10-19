@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GENERAL 
+" GENERAL
 
 set nocompatible            " get rid of Vi compatibility mode. SET FIRST!
 let mapleader = "\<Space>"  " change default leader key
@@ -18,9 +18,25 @@ set hlsearch                " don't continue to highlight searched phrases.
 set incsearch               " but do highlight as you type your search.
 set ignorecase              " ignore case sensitive in the file
 set smartcase               " if you type in camel case, assume camel case
-nmap <Leader>c :nohlsearch<cr> 
 
 set mouse=a                 " enable mouse in all modes
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CUSTOM MAPPINGS
+
+" clear search highlights
+nmap <Leader>c :nohlsearch<cr>
+
+" add lines and avoid insert mode
+nmap O O<Esc>
+nmap o o<Esc>k
+
+" enter visual mode when pressing shift
+nmap JJ vj
+vmap J j
+nmap KK vk
+vmap K k
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -53,16 +69,18 @@ nnoremap <Tab> gt
 
 call plug#begin('~/.vim/plugged')
 
+" janus plugins
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
+Plug 'bronson/vim-trailing-whitespace'
 
 " add molokai theme
 Plug 'tomasr/molokai'
 
-" On-demand loading
+" on-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-" Group dependencies, vim-snippets depends on ultisnips
+" group dependencies, vim-snippets depends on ultisnips
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 call plug#end()
@@ -72,8 +90,8 @@ call plug#end()
 " Themes
 
 " Configs to make Molokai look great
-let g:molokai_original=1  
-let g:rehash256=1  
-colorscheme molokai  
+let g:molokai_original=1
+let g:rehash256=1
+colorscheme molokai
 
 
