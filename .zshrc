@@ -88,6 +88,10 @@ source $ZSH/oh-my-zsh.sh
 ###################
 # My customizations
 
-# Alias to manage my dotfiles using a bare git repository
+# aliases
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias tt='cd www/touts'
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
