@@ -51,7 +51,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(brew bundler capistrano git osx rails ruby zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,3 +95,10 @@ alias tt='cd www/touts'
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# vim mode
+bindkey -v
+bindkey -M viins 'jj' vi-cmd-mode
+bindkey ‘^R’ history-incremental-search-backward
+
+
