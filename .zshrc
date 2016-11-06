@@ -62,18 +62,8 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -90,15 +80,21 @@ source $ZSH/oh-my-zsh.sh
 
 # aliases
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dss='dotfiles status -s'
+alias dco='dotfiles checkout'
+alias da='dotfiles add'
+alias dcam='dotfiles commit -am'
+alias ddpush='dotfiles push origin $(git_current_branch)'
+alias ddpull='dotfiles pull origin $(git_current_branch)'
 alias tt='cd www/touts'
+alias gcm='git commit -m'
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # vim mode
-bindkey -v
-bindkey -M viins 'jj' vi-cmd-mode
-bindkey ‘^R’ history-incremental-search-backward
-
+# bindkey -v
+# bindkey -M viins 'jj' vi-cmd-mode
+# bindkey '^R' history-incremental-search-backward
 

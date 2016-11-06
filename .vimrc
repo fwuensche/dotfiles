@@ -2,23 +2,20 @@
 " GENERAL
 
 let mapleader = "\<Space>"  " change default leader key
-
+set mouse=a                 " enable mouse in all modes (yep, mouse! so what?)
 set nocompatible            " get rid of Vi compatibility mode. SET FIRST!
 set history=1000            " increase command history limit
 set undofile                " undo even after closing file
 set encoding=utf-8          " change default encoding
+set laststatus=2            " last window always has a statusline
+set ruler                   " always show info along bottom.
+set autowriteall            " auto save when changing buffer
 
 " lines
 set number                  " show line numbers
 set numberwidth=2           " make the number gutter n characters wide
 set relativenumber          " restart line number on current line
 set cul                     " highlight current line
-
-" info
-set laststatus=2            " last window always has a statusline
-set ruler                   " always show info along bottom.
-
-set mouse=a                 " enable mouse in all modes (yep, mouse! so what?)
 
 " search
 set hlsearch                " don't continue to highlight searched phrases.
@@ -28,6 +25,16 @@ set ignorecase              " seach non case sentitive
 set smartcase               " if start as camelcase, then camelcase
 set gdefault                " always replace globally with :%s/
 nmap <Leader>c :nohlsearch<cr>
+
+" Uncomment the following to have Vim jump to the last position when
+" " reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -56,22 +63,43 @@ nnoremap g* g*zz
 nnoremap g# g#zz
 
 " cycle to next and previous tabs
-nnoremap <S-Tab> gT
-nnoremap <Tab> gt
+nmap <S-Tab> [b
+nmap <Tab> ]b
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM MAPPINGS
 
+"select all
+map <leader>a <esc>ggVG<CR>
+
+" copy selected text to system clipboard
+vnoremap <silent> <leader>y :<CR>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<CR>
+
+" open buffer list
+nnoremap <leader>b :ls<cr>:b<space>
+" open new buffer (aka tab)
+nnoremap <leader>t :enew<cr>
+" wipe (close) current buffer
+nnoremap <leader>w :bd<cr>
+" save current buffer
+nnoremap <leader>s :w<cr>
+" quit vim
+nnoremap <leader>q :qa<cr>
+
 " escape
 inoremap jj <ESC>
+inoremap kk <ESC>
 
-" edit vimrc
-nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+" edit vimrc and zshrc
+nnoremap <leader>ev :e $MYVIMRC<cr>
+nnoremap <leader>ez :e $HOME/.zshrc<cr>
+
 " and auto reload it
 augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
+    autocmd BufWritePost $MYVIMRC AirlineRefresh
 augroup END " }
 
 " add lines and avoid insert mode
@@ -79,17 +107,28 @@ nmap O O<Esc>
 nmap o o<Esc>k
 
 " open window split vertically
-nnoremap <leader>d <C-w>v<C-w>l
+nnoremap <leader>d :vnew<CR>
+
+" grab lines up and down
+nnoremap ∆ ddp
+nnoremap ˚ ddkP
 
 " jump through blocks
 nmap J }
 vmap J }
 nmap K {
 vmap K {
+nmap L e
+vmap L e
+nmap H b
+vmap H b
 
-" go to next blank line with alt-arrow
-map <Esc>^[^[[B {
-map <Esc>^[^[[A }
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+" $/^ doesn't do anything
+nnoremap $ <nop>
+nnoremap ^ <nop>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -108,11 +147,13 @@ Plug 'tpope/vim-commentary'
 " other
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'haya14busa/incsearch.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-airline/vim-airline'
 
 " themes
 Plug 'flazz/vim-colorschemes'
-Plug 'tomasr/molokai'
-Plug 'alessandroyorba/despacio'
 
 call plug#end()
 
@@ -120,17 +161,24 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin related customizations
 
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
 " open ctrlP files in a new tab by default
 " https://github.com/kien/ctrlp.vim/issues/160
 " let g:ctrlp_prompt_mappings = {
 "     \ 'AcceptSelection("e")': ['<c-t>'],
 "     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
 "     \ }
+
 " ctrlP: open on a new tab
-nmap <leader>p :tab split<cr>:CtrlP<cr>
+nmap <leader>p :CtrlP<cr>
 
 " ack: open search on a new tab
-nmap <leader>a :tab split<cr>:Ack ""<left>
+nmap <leader>F :Ack ""<left>
+nmap <leader>f /
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -141,11 +189,11 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 noremap <leader>/ :Commentary<cr>
 
 " theme
-colorscheme neutron
+colorscheme solarized
+set background=dark
 
 " nerd tree
 nnoremap <leader>\ :NERDTreeToggle<cr>
-
 
 " You can use other keymappings like <C-l> instead of <CR> if you want to
 " use these mappings as default search and somtimes want to move cursor with
