@@ -24,10 +24,8 @@ set ignorecase              " ignore case sensitive in the file
 set ignorecase              " seach non case sentitive
 set smartcase               " if start as camelcase, then camelcase
 set gdefault                " always replace globally with :%s/
-nmap <Leader>c :nohlsearch<cr>
 
-" Uncomment the following to have Vim jump to the last position when
-" " reopening a file
+" jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
@@ -40,9 +38,9 @@ autocmd QuickFixCmdPost    l* nested lwindow
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FORMATTING & LAYOUT
 
-set scrolloff=5             " minimal number of lines before and after cursor
-set splitbelow              " create new horizontal windows below
-set splitright              " create new horizontal windows to the right
+set scrolloff=5           " minimal number of lines before and after cursor
+set splitbelow            " create new horizontal windows below
+set splitright            " create new horizontal windows to the right
 
 " tabulation & indentantion
 set tabstop=2             " tab spacing
@@ -74,7 +72,7 @@ nmap <Tab> ]b
 map <leader>a <esc>ggVG<CR>
 
 " copy selected text to system clipboard
-vnoremap <silent> <leader>y :<CR>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<CR>
+vnoremap <silent> <leader>c :<CR>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<CR>
 
 " open buffer list
 nnoremap <leader>b :ls<cr>:b<space>
@@ -151,19 +149,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'severin-lemaignan/vim-minimap'
 
 " themes
 Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin related customizations
-
-" airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
 
 " open ctrlP files in a new tab by default
 " https://github.com/kien/ctrlp.vim/issues/160
@@ -172,7 +167,7 @@ let g:airline_powerline_fonts = 1
 "     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
 "     \ }
 
-" ctrlP: open on a new tab
+" ctrlP: open on a new buffer
 nmap <leader>p :CtrlP<cr>
 
 " ack: open search on a new tab
@@ -217,3 +212,13 @@ let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 
+" Airline plugin
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 0
+let g:airline_theme='luna'
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
