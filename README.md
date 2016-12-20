@@ -1,5 +1,5 @@
-# dotfiles
-Simple dotfiles by a ruby developer
+## Clone these dotfiles into a new computer
+
 clone your github repository
 
 ```
