@@ -3,7 +3,7 @@
 clone your github repository
 
 ```
-git clone --bare https://github.com/USERNAME/dotfiles.git $HOME/.dotfiles
+git clone --bare https://github.com/fwuensche/dotfiles.git $HOME/.dotfiles
 ```
 
 define the alias in the current shell scope
